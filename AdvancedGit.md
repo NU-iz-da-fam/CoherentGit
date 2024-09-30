@@ -68,7 +68,7 @@ A---B---C---D'---E'---F'
 
 - Image below describes in detail the difference between Git merge and git rebase. 
 
-![alt text](images/merge_vs_rebase.png "structure")
+![alt text](images/merge_vs_rebase.png "comparison")
 
 ### 2. Git cherry-pick
 ### 3. Git stash
