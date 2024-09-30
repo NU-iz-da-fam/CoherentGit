@@ -23,8 +23,8 @@
     main
     |
     A---B---C        (main)
-            |
-            D---E---F  (feature-branch)
+        |
+        D---E---F  (feature-branch)
     ```
 - Now, you want to move **feature-branch** to be on top of the latest **main** branch (after commit C). 
 
@@ -41,9 +41,9 @@
     ```
     main
     |
-    A---B---C---      (main)
-                |
-                D'---E'---F'  (feature-branch)
+    A---B---C    (main)
+            |
+            D'---E'---F'  (feature-branch)
     ```
 - Here, D', E', and F' are new commits that represent the same changes as D, E, and F, but rebased on top of commit C.
 
@@ -78,13 +78,31 @@ A---B---C---D'---E'---F'
     + Save changes locally without dummy commit when suddenly switching to other task.
     + When done with ad-hoc task, you can go back and apply changes.
 - Common ```git stash``` commands:
-    + ```git stash``` / ```git stash save```: Saves your uncommitted changes
-    + ```git stash list```: Shows all the stashes you have saved
+    + ```git stash``` / ```git stash save```: Saves your uncommitted changes. Assume you add file_1.txt
         ```
-        example
+        git stash save 'Add file 1'
         ```
-    + ```git stash apply```: Re-applies the last stashed changes without removing them from the stash list.
-    + ```git stash pop```: Re-applies the last stashed changes and removes them from the stash list.
+        Example output:
+        ```
+        Saved working directory and index state On main: Add file 1
+        ```
+    + ```git stash -u```: Stashes untracked (new) files beside tracked files.
+    + ```git stash list```: Shows all the stashes you have saved. Example output:
+        ```
+        stash@{0}: On main: Add file 1
+        ```
+    + ```git stash apply``` / ```git stash apply stash@{N}```: Re-applies the last / specified stashed changes  without removing them from the stash list. Example output will be:
+        ```
+        Your branch is up to date with 'origin/main'.
+
+        Changes to be committed:
+        (use "git restore --staged <file>..." to unstage)
+            new file:   example/file_1.txt
+        ```
+    + ```git stash pop``` / ```git stash pop stash@{0}``` : Re-applies the last / specified stashed changes and removes them from the stash list.
+    + ```git stash drop [stash@{N}]```: Removes a specific stash without applying it.
+    + ```git stash clear```: delete all stashed changes in repository. After deleting, we can not retrive these changes anymore.
+
 
 ### 4. Git reset
 ### 5. Git revert
