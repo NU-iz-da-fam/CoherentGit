@@ -105,7 +105,53 @@ A---B---C---D'---E'---F'
 
 
 ### 4. Git reset
+
+- Git reset is used to undo changes in commits, unstage files, or even discard uncommitted changes.
+
+- Common ```git reset``` scenarios:
+    + ```git reset --soft HEAD~1```: Undo to the last commit, keep changes staged.
+    + ```git reset --mixed HEAD~n```: Undo to the ```n``` th commit, unstage changes, keep working directory intact. This is also **default** mode of git reset.
+    + ```git reset --hard HEAD~1```: Undo to previous commit, unstage changes, and delete all modifications from the working directory. **All uncommitted changes** will be lost, so use this with caution
+
+- Easy to understand based on [this thread](https://github.com/orgs/community/discussions/68224)
+    ```
+    git reset --hard: undos git commit, git add, and changes you've made since last commit
+    git reset --mixed: undos git commit and git add
+    git reset --soft: undos git commit
+    ```
+
 ### 5. Git revert
+- Git revert undoes a commit by creating a new commit that reverses the changes made by the specified commit, **preserving the commit history**.
+
+- Common ```git revert``` scenarios:
+    + **Undo a specific commit**, suppose ```add_file_1``` is the commit you want to revert. Below command creates a new commit that undoes the changes made by ```add_file_1```
+
+        ```
+        git revert add_file_1
+        ```
+    + **Undo Multiple Commits**. Support ```add_file_1```, ```add_file_2```, ```add_file_3``` are reverted commits. This creates three new commits, each undoing one of the specified commits.
+
+        ```
+        git revert add_file_1 add_file_2 add_file_3
+        ```
+
+    + **Revert a Merge Commit**: A merge commit was made, but it caused issues, and you want to undo the merge. To revert a merge commit, use the ```-m 1```flag to return to the first parent right before *merge-commit-hash*:
+        ```
+        git revert -m 1 <merge-commit-hash>
+        ```
+
+    + **Fix a Bad Hotfix in Production**: A recent hotfix introduced an issue in the production branch. Rather than rewriting history, you can revert the problematic commit and push the fix to production.
+
+        ```
+        git revert <commit-hash>
+        git push origin main
+        ```
+**Difference between git reset and git revert**
+- Use git reset when you need to modify history locally and are certain it won't affect others.
+- Use git revert when working in a collaborative environment and you need to safely undo changes without altering the project's history.
+
+![alt text](images/reset_vs_revert.png "comparison revert reset")
+
 ### 6. Git tag
 ### 7. Git reflog
 
