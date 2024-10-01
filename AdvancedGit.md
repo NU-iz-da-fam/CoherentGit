@@ -71,6 +71,22 @@ A---B---C---D'---E'---F'
 ![alt text](images/merge_vs_rebase.png "comparison")
 
 ### 2. Git cherry-pick
+- Git cherry-pick allows you to apply the changes introduced by a specific commit (or multiple commits) from one branch to another. Instead of merging an entire branch, cherry-pick lets you select individual commits and apply them to your current branch.
+- Common ```git cherry-pick``` scenarios:
+    + Isolate specific features, grab a single commit. Let’s say commit ```featureA``` on ```feature``` fixes a bug, and you want that bug fix in the ```main``` branch:
+        ```
+        git checkout main
+        git cherry-pick featureA
+        ```
+    + Cherry-pick multiple commits. This applies changes from multiple specific commits.
+        ```
+        git cherry-pick <commitA> <commitB> <commitC>
+        ```
+    + Handle merge conflicts during cherry-pick. If conflicts occur during cherry-picking, you will need to resolve them manually and then run
+        ```
+        git cherry-pick --continue
+        ```
+
 ### 3. Git stash
 - Git stash is a git feature which temporarily saves uncommitted changes so you can work on something else without committing or losing your current work.
 
@@ -154,4 +170,28 @@ A---B---C---D'---E'---F'
 
 ### 6. Git tag
 ### 7. Git reflog
+- Git reflog is a command which tracks all changes to the **HEAD** pointer in your local repository, including **commits, resets, rebases, and checkouts**. It provides a history of actions that move HEAD, even for commits that aren't part of the branch's visible commit history. This helps you recover lost commits and undo mistakes.
+- For vietnamese, you could refer [this article](https://viblo.asia/p/git-reflog-phao-cuu-sinh-cho-nhung-loi-lam-hay-gap-tren-git-x7Z4Dja2LnX) 
+- Common ```git reflog``` scenarios:
+    + **Recover lost commit**. You accidentally used ```git reset --hard``` or deleted a branch, and you need to retrieve a lost commit.
+        ```
+        git reflog
+        git checkout <commit-hash>
+        ```
+    + **Find the previous branch**. If you checkout to other branch but forget the name of branch
+        ```
+        git reflog
+        git checkout <branch>
+        ```
+    + **Undo a bad reset**. You reset your branch but want to return to a previous state. 
+        ```
+        git reflog
+        git reset --hard <commit-hash>
+        ```
+    + **Fix a bad rebase or merge**. After a problem with rebase or merge, recover the branch’s state before the operation.
+        ```
+        git reflog
+        git reset --hard <commit-before-rebase>
+        ```
 
+- Notes: Git reflog is your safety net when things go wrong in Git which helps to list out all the commit even they are not visible in git history. Git reflog needs to cooperate with other commands to be effective.
