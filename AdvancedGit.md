@@ -169,6 +169,28 @@ A---B---C---D'---E'---F'
 ![alt text](images/reset_vs_revert.png "comparison revert reset")
 
 ### 6. Git tag
+- Git tag is a pointer to a specific commit in your repository. It's typically used to mark important commits, like release versions (e.g., v1.0.0). Tags can be lightweight (just a pointer) or annotated (with metadata like a message and author).
+
+- ```git tag``` types:
+    + **Lightweight tags**: A simple tag that’s just a pointer to a specific commit. It doesn’t store any additional information (e.g., author, message). 
+        ```
+        git tag <tag-name>
+        ```
+    + **Annotated tags**: A tag that stores full metadata such as the tagger’s name, email, date, and a message. It's stored as a separate Git object. This type of git tag is referred for official release or a milestone.
+        ```
+        git tag -a <tag-name> -m "Tag message"
+        ```
+
+- Common scenarios:
+    + Tag a specific commit ```git tag <tag-name> <commit-hash>```
+    + List tags: ```git tag```
+    + Push Tags to Remote:
+        - ```git push origin <tag-name>```: for a specific tag name
+        - ```git push --tags``` : for all tags
+    + Delete a tag:
+        - ```git tag -d <tag-name>```: for a local tag name
+        - ```git push origin --delete <tag-name>```: for a remote tag
+    
 ### 7. Git reflog
 - Git reflog is a command which tracks all changes to the **HEAD** pointer in your local repository, including **commits, resets, rebases, and checkouts**. It provides a history of actions that move HEAD, even for commits that aren't part of the branch's visible commit history. This helps you recover lost commits and undo mistakes.
 - For vietnamese, you could refer [this article](https://viblo.asia/p/git-reflog-phao-cuu-sinh-cho-nhung-loi-lam-hay-gap-tren-git-x7Z4Dja2LnX) 
@@ -194,4 +216,4 @@ A---B---C---D'---E'---F'
         git reset --hard <commit-before-rebase>
         ```
 
-- Notes: Git reflog is your safety net when things go wrong in Git which helps to list out all the commit even they are not visible in git history. Git reflog needs to cooperate with other commands to be effective.
+- **Notes**: Git reflog is your safety net when things go wrong in Git which helps to list out all the commit even they are not visible in git history. Git reflog needs to cooperate with other commands to be effective.
