@@ -12,6 +12,7 @@
     git config --global user.email "you@example.com"
     ```
 - This name and email will appear when you push your code to repository.
+- Notes: From **August 13, 2021**, Github remove support for [password authentication](https://docs.github.com/get-started/getting-started-with-git/about-remote-repositories#cloning-with-https-urls). Please check [this repository](https://github.com/NU-iz-da-fam/setup-SSH-key-github-repos) if you want to create a ssh-key for you account.
 ### 3.1. Work with an existing repository
 - When working with an existing repos, you only need to clone, then use with git workflow.
     ```
@@ -32,7 +33,7 @@
     ```
     git push -u origin main
     ```
-- Verify the remote:
+- Verify the remote and kind of clone (ssh/https):
     ```
     git remote -v
     ```
@@ -71,10 +72,23 @@
     ```
     git branch 
     ```
+- Rename current branch
+    ```
+    git branch -m <new-branch-name>
+    ```
 - Create and switch to a new branch
     ```
     git checkout -b [branch-name]
     ```
+- Compare branches
+    ```
+    git diff <branch-1> <branch-2>
+    ```
+- Switch to another branch
+    ```
+    git checkout [branch-name]
+    ```
+
 ### 6. Merging
 - Assume you're on branch ```dev```, you want to merge branch ```tmp``` to dev:
     ```
