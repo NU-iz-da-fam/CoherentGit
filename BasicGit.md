@@ -94,6 +94,11 @@
     ```
     git merge tmp
     ```
+- Merge 2 branches that have different histories. This type of merge is dangerous, please ensure you understand how it work before merging
+    ```
+    git merge tmp --allow-unrelated-histories
+    ```
+    - Then solving conflicts and commit.
 ### 7. Commit history
 - To show the commit history
     ```
