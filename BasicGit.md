@@ -70,7 +70,7 @@
 ### 5. Branching
 - List all branches
     ```
-    git branch 
+    git branch -l
     ```
 - Rename current branch
     ```
@@ -88,7 +88,15 @@
     ```
     git checkout [branch-name]
     ```
-
+- Delete a branch
+    - Safe delete: only delete if branch has been merged
+    ```
+    git brach -d [branch-name]
+    ```
+    - Force delete: if you want to delete this branch immediately.
+    ```
+    git brach -D [branch-name]
+    ```
 ### 6. Merging
 - Assume you're on branch ```dev```, you want to merge branch ```tmp``` to dev:
     ```
